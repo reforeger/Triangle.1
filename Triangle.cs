@@ -2,9 +2,9 @@
 
 namespace Triangle_Forms
 {
-	class Triangle
+	public Triangle()
     {
-    public double a; //Первая сторона
+        public double a; //Первая сторона
     public double b; //Вторая сторона
     public double c; //Третия сторона
     public double l; //Четвёртая сторона
@@ -62,9 +62,8 @@ namespace Triangle_Forms
         }
     }
 
-        public static object Perimetr { get; internal set; }
 
-        public Triangle(double A, double B, double C) // Конструктор
+    public Triangle(double A, double B, double C) // Конструктор
     {
         //Создаём с заданными длиннами сторон согласно заданию
         a = A;

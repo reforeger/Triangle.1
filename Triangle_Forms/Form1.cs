@@ -10,30 +10,25 @@ using System.Windows.Forms;
 
 namespace Triangle_Forms
 {
-    public partial class Form1 : Form 
+    public partial class Form1 : Form
     {
         Button btn;
         TextBox txtb1, txtb2, txtb3;
-        Label lbl;
+        ListView listview;
         public Form1()
         {
-            {
-                InitializeComponent();
-            }
 
 
             Height = 600;
             Width = 800;
-            ListBox lbox = new ListBox();
-            string[] colors_nimetused = new string[] { "Kollane", "Punane", "Roheline", "Sinine" };
-            foreach (var item in colors_nimetused)
-            {
-                lbox.Items.Add(item);
-            }
-            lbox.Location = new Point(50, 175);
-            lbox.Width = colors_nimetused.Length * 25;
-            lbox.Height = colors_nimetused.Length * 15;
-            Controls.Add(lbox);
+
+            listview = new ListView();
+            listview.Width = 200;
+            listview.Height = 150;
+            listview.Location = new Point(80, 50);
+            Controls.Add(listview);
+
+
 
 
             btn = new Button();
@@ -47,11 +42,6 @@ namespace Triangle_Forms
 
 
 
-            lbl = new Label();
-            lbl.Text = "Tarkvara";
-            lbl.Size = new Size(150, 50);
-            lbl.Location = new Point(110, 120);
-            Controls.Add(lbl);
 
 
 
@@ -76,23 +66,51 @@ namespace Triangle_Forms
             Controls.Add(txtb2);
             Controls.Add(txtb3);
 
+
+
+
         }
 
-        private void Btn_Click(object sender, EventArgs e)
-        {
-            double a, b, c;
-            MessageBox.Show(txtb1.Text);
-        }
-
-        private void lbox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-        private void txtb11(object sender, KeyEventArgs e)
+     /*   private void txtb1_Changed(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 MessageBox.Show(txtb1.Text);
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                MessageBox.Show(txtb1.Text);
+            }
+        }*/
+        private void Btn_Click(object sender, EventArgs e)
+        {
+            double a, b, c;
+            a = Convert.ToDouble(txtb1.Text);
+            b = Convert.ToDouble(txtb2.Text);
+            c = Convert.ToDouble(txtb3.Text);
+            Triangle triangle = new Triangle(a, b, c);
+            listview.Items.Add("Сторона a");
+            listview.Items.Add("Сторона b");
+            listview.Items.Add("Сторона c");
+            listview.Items.Add("Периметр");
+            listview.Items.Add("Площадь");
+            listview.Items.Add("Существует?");
+            listview.Items.Add("Спецификатор");
+            listview.Items[0].SubItems.Add(triangle.OutputA());
+            listview.Items[1].SubItems.Add(triangle.OutputB());
+            listview.Items[2].SubItems.Add(triangle.OutputC());
+            listview.Items[3].SubItems.Add(Convert.ToString(triangle.Perimeter()));
+            listview.Items[4].SubItems.Add(Convert.ToString(triangle.Surface()));
+            if (triangle.ExistTriangle) { listview.Items[5].SubItems.Add("Существует"); }
+            else listview.Items[5].SubItems.Add("Не существует");
+        }
+
+        private void lbox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+        private void Txt2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
         }
     }
