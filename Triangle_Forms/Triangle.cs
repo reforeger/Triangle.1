@@ -7,7 +7,7 @@ namespace Triangle_Forms
     public double a; //Первая сторона
     public double b; //Вторая сторона
     public double c; //Третия сторона
-    public double l; //Четвёртая сторона
+    public double h; //Высота стороны
 
 
     // Свойства
@@ -29,8 +29,8 @@ namespace Triangle_Forms
     }
     public double GetSetH
     {
-        get { return l; }
-        set { l = value; }
+        get { return h; }
+        set { h = value; }
     }
     public bool ExistTriangle
     // существует ли треугольник
@@ -70,26 +70,26 @@ namespace Triangle_Forms
         a = A;
         b = B;
         c = C;
-        l = Height();
+        h = Height();
     }
 
 
 
-    public Triangle(bool byHeight, double A, double L)
+    public Triangle(bool byHeight, double A, double H)
     // конструктор с линиями по краям
     {
         if (byHeight == true)
         {
             a = A;
-            l = L;
-            b = l;
-            c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(l, 2));
+            h = H;
+            b = h;
+            c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(h, 2));
         }
         else
         {
             a = A;
-            l = L;
-            b = Math.Sqrt(Math.Pow(a / 2, 2) + Math.Pow(l, 2));
+            h = H;
+            b = Math.Sqrt(Math.Pow(a / 2, 2) + Math.Pow(h, 2));
             c = b;
         }
     }
@@ -99,7 +99,7 @@ namespace Triangle_Forms
 
 
 
-    public Triangle() // конструктор без атрибутов
+    public Triangle(double a) // конструктор без атрибутов
     {
         a = 0;
         b = 0;
@@ -128,9 +128,14 @@ namespace Triangle_Forms
         return Convert.ToString(c);
     }
 
+    public string OutputH()
+    {
+        return Convert.ToString(h);
+    }
 
 
-    public double Perimeter() // периметр
+
+        public double Perimeter() // периметр
     {
         double p = a + b + c;
         return p;
